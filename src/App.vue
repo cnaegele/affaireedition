@@ -28,8 +28,8 @@
   import AffaireEdition from '@/components/AffaireEdition.vue'
   const lesDatas = data()
   const urlParams = new URLSearchParams(window.location.search)
-  const prmIdAffaire = ref('')
+  const prmIdAffaire = ref(0)
   if (urlParams.has('idaffaire')) {
-    prmIdAffaire.value = urlParams.get('idaffaire')
+    prmIdAffaire.value = parseInt(urlParams.get('idaffaire'))
   }
 </script>

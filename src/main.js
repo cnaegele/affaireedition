@@ -4,7 +4,7 @@
  * Bootstraps Vuetify and other plugins then mounts the App`
  */
 
-//import './assets/main.css'
+import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

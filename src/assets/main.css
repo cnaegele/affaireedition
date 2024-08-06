@@ -1,0 +1,11 @@
+.titreChampSaisie {
+    font-weight: bold;
+    margin-top: 8px !important;
+}
+.titreChampInfo {
+    font-weight: bold;
+}
+.messageErreur {
+    color: rgb(161, 119, 119);
+    font-weight: bold;
+}

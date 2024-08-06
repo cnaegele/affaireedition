@@ -33,6 +33,8 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     console.log(oResponse)
     affaireDatas.id = ref(oResponse.IdAffaire)
     affaireDatas.type = ref(oResponse.Type)
+    affaireDatas.nom = ref(oResponse.Nom)
+    affaireDatas.description = ref(oResponse.Description)
 }
 
 
