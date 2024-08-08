@@ -25,6 +25,16 @@ export const data = defineStore({
         dateCreation: ref(''),
         dateDebut: ref(''),
         dateFin: ref(''),
+        acteurConcerne: [],
+        /*
+          idacrole: ref(0),
+          idacteur: ref(0),
+          bactif: ref(true),
+          nom: ref(''),
+          idrole: ref(0),
+          role: ref(''),
+          commentaire: ref(''),
+        */
     },
     messagesErreur: {
       dataRue: ref(''),

@@ -35,6 +35,45 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     affaireDatas.type = ref(oResponse.Type)
     affaireDatas.nom = ref(oResponse.Nom)
     affaireDatas.description = ref(oResponse.Description)
+
+    //acteurs concernés
+    let aoActeurConcInp = [] , aoActeurConcOut = [], oActeurConcOut
+    let ac_idAcRole, ac_idActeur, ac_bactif, ac_nomActeur, ac_idRole, ac_role, ac_commentaire
+    if (oResponse.hasOwnProperty('AcR')) {
+        if (!Array.isArray(oResponse.AcR)) {
+            aoActeurConcInp.push(oResponse.AcR)    
+        } else {
+            aoActeurConcInp = oResponse.AcR    
+        }
+        for (let i=0; i<aoActeurConcInp.length; i++) {
+            ac_idAcRole = aoActeurConcInp[i].AcRId    
+            ac_idActeur = aoActeurConcInp[i].AcRIdActeur
+            if (aoActeurConcInp[i].AcRBActif == 1) {
+                ac_bactif = true    
+            } else {
+                ac_bactif = false    
+            }  
+            ac_nomActeur = aoActeurConcInp[i].AcRNomActeur    
+            ac_idRole = aoActeurConcInp[i].AcRIdRole    
+            ac_role = aoActeurConcInp[i].AcRRole
+            if (aoActeurConcInp[i].hasOwnProperty('AcRCommentaire')) {
+                ac_commentaire = aoActeurConcInp[i].AcRCommentaire
+            } else {
+                ac_commentaire = ''    
+            }
+            oActeurConcOut = {
+                idacrole: ac_idAcRole,
+                idacteur: ac_idActeur,
+                bactif: ac_bactif,
+                nom: ac_nomActeur,
+                idrole: ac_idRole,
+                role: ac_role,
+                commentaire: ac_commentaire, 
+            }
+            aoActeurConcOut.push(oActeurConcOut) 
+        }
+    }
+    affaireDatas.acteurConcerne = ref(aoActeurConcOut)
 }
 
 

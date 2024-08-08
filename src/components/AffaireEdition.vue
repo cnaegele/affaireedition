@@ -1,7 +1,13 @@
 <template>
+  <v-container>
     <AffaireIdType />
     <AffaireNom />
     <AffaireDescription />
+    <AffaireActeursConcernes :rolesdisp="[
+      { id: 10, label: 'Client.e', value: '10'},
+    ]" 
+    />
+  </v-container>     
 </template>
 
 <script setup>
@@ -9,6 +15,7 @@ import { defineProps } from 'vue'
 import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'
+import AffaireActeursConcernes from '@/components/AffaireActeursConcernes.vue'
 import { data } from '@/stores/data.js'
 import { getAffaireData } from '@/axioscalls.js'
 const props = defineProps({

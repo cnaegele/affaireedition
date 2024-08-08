@@ -6,14 +6,9 @@
         Utilisation autoris&eacute;e uniquement aux membres du groupe {{ lesDatas.user.groupeSecurite }}
       </div>
       <div v-if="lesDatas.user.bInGroupe == 1">
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="12">
-              <h2>Edition affaire</h2>
-            </v-col>
-          </v-row>
-          <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
-        </v-container>
+              <h2 style="text-align: center;">Edition affaire</h2>
+         <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
+        
       </div>
     </v-main>
 
