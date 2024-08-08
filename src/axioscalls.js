@@ -54,8 +54,8 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
                 ac_bactif = false    
             }  
             ac_nomActeur = aoActeurConcInp[i].AcRNomActeur    
-            ac_idRole = aoActeurConcInp[i].AcRIdRole    
-            ac_role = aoActeurConcInp[i].AcRRole
+            ac_idRole = aoActeurConcInp[i].AcRIdRoleActeur    
+            ac_role = aoActeurConcInp[i].AcRRoleActeur
             if (aoActeurConcInp[i].hasOwnProperty('AcRCommentaire')) {
                 ac_commentaire = aoActeurConcInp[i].AcRCommentaire
             } else {

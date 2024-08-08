@@ -1,3 +1,4 @@
+
 <template>
     <v-row dense>
       <v-col cols="12" md="12">
@@ -9,7 +10,18 @@
             <v-expansion-panel-text>
               <v-container>
                 <v-row v-for="(acteurConcerne, index) in lesDatas.affaire.acteurConcerne" :key="acteurConcerne.idacrole">
-                  <v-col>{{ acteurConcerne.nom }}</v-col>  
+                  <v-col>{{ acteurConcerne.nom }}</v-col>
+                  <v-col>
+                    <v-select
+                      v-model="acteurConcerne.idrole"
+                      :items="rolesdisp"
+                      label="rôle"
+                      item-title="label"
+                      :reduce="(item) => rolesdisp.value"
+                      placeholder="Sélectionner un rôle"
+                    ></v-select>
+                     
+                  </v-col> 
                 </v-row>
               </v-container>
             </v-expansion-panel-text>
@@ -20,7 +32,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from 'vue'
+import { defineProps, toRefs, ref } from 'vue'
 import { data } from '@/stores/data.js'
 const lesDatas = data()
 
@@ -46,4 +58,7 @@ const props = defineProps({
 const { rolesdisp } = toRefs(props)
 
 console.log(props.rolesdisp)
+console.log(lesDatas.affaire.acteurConcerne)
+
+
 </script>

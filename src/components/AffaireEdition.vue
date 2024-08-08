@@ -4,8 +4,9 @@
     <AffaireNom />
     <AffaireDescription />
     <AffaireActeursConcernes :rolesdisp="[
+      { id: 9, label: 'Concerné.e', value: '9'},
       { id: 10, label: 'Client.e', value: '10'},
-    ]" 
+      ]" 
     />
   </v-container>     
 </template>
