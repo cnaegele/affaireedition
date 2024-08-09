@@ -10,6 +10,7 @@
          <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
         
       </div>
+      <div>{{ JSON.stringify(lesDatas) }}</div>
     </v-main>
 
     <AppFooter />
