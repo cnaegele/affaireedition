@@ -86,7 +86,7 @@
                           v-bind="props"
                           icon="mdi-delete"
                           variant="text"
-                          @click="supprimeLienActeur(acteurConcerne.idacteur)"
+                          @click="supprimeLienActeur(acteurConcerne.idacrole, index)"
                         ></v-btn>
                       </template>        
                     </v-tooltip>
@@ -170,16 +170,60 @@ const receptionActeurConc = (idacteur, jsonData) => {
     aoActeurRecu = oActeurRecu   
   }
   for (let i=0; i<aoActeurRecu.length; i++) {
-    const oActeurConcernePlus = {
-      "idacrole": 0,
-      "idacteur": aoActeurRecu[i].acteurid,
-      "bactif": bactif,
-      "nom": aoActeurRecu[i].acteurnom,
-      "idrole": roledefaut.value,
+    //On regarde si cet acteur est déjà dans les acteurs concernés
+    const idActeurRecu = aoActeurRecu[i].acteurid
+    let btrouve = false
+    let aIdRoleTrouve = []
+    let idRolePossible = roledefaut.value
+    for (let j=0; j<lesDatas.affaire.acteurConcerne.length; j++) {
+      if (lesDatas.affaire.acteurConcerne[j].idacteur == idActeurRecu) {
+        btrouve = true
+        aIdRoleTrouve.push(lesDatas.affaire.acteurConcerne[j].idrole) 
+      }
     }
-    lesDatas.affaire.acteurConcerne.push(oActeurConcernePlus)
-  }
+    console.log(`aIdRoleTrouve: ${aIdRoleTrouve}`)
+    if (btrouve) {
+      //L'acteur fait déja partie des acteurs concernés, on lui cherche un rôle pas utilisé
+      idRolePossible = '0'
+      for (let k=0; k<props.rolesdisp.length; k++) {
+        let bdejarole = false
+        let idRoleTmp = props.rolesdisp[k].id
+        for (let l=0; l<aIdRoleTrouve.length; l++) {
+          if (aIdRoleTrouve[l] == idRoleTmp) {
+            bdejarole = true
+            break;  
+          }
+        }
+        if (!bdejarole) {
+          idRolePossible = idRoleTmp.toString()
+          break;  
+        }
+      }
+    }
 
+    if (idRolePossible != '0') {
+      const oActeurConcernePlus = {
+        "idacrole": 0,
+        "idacteur": aoActeurRecu[i].acteurid,
+        "bactif": bactif,
+        "nom": aoActeurRecu[i].acteurnom,
+        "idrole": idRolePossible,
+      }
+      lesDatas.affaire.acteurConcerne.push(oActeurConcernePlus)
+      //Mise à jour en base de donnée
+      //???
+    } else {
+      alert(`Pas de rôle disponible pour l'acteur ${aoActeurRecu[i].acteurnom} qui fait déjà partie des acteurs concernés`)
+    }
+  }
+}
+
+const supprimeLienActeur = (idAcRole, index) => {
+  if (idAcRole > 0) {
+    //Mise à jour en base de donnée
+    //???
+  }
+  lesDatas.affaire.acteurConcerne.splice(index,1)
 }
 
 </script>
