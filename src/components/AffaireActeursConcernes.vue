@@ -181,7 +181,6 @@ const receptionActeurConc = (idacteur, jsonData) => {
         aIdRoleTrouve.push(lesDatas.affaire.acteurConcerne[j].idrole) 
       }
     }
-    console.log(`aIdRoleTrouve: ${aIdRoleTrouve}`)
     if (btrouve) {
       //L'acteur fait déja partie des acteurs concernés, on lui cherche un rôle pas utilisé
       idRolePossible = '0'
