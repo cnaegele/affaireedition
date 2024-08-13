@@ -36,6 +36,10 @@ export const data = defineStore({
           commentaire: ref(''),
         */
     },
+    controle: {
+      dataChange: ref(false),
+      dataActeurConcChange: ref(false),
+    },
     messagesErreur: {
       dataRue: ref(''),
       dataAdresse: ref(''),

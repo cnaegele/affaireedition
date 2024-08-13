@@ -76,6 +76,26 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     affaireDatas.acteurConcerne = ref(aoActeurConcOut)
 }
 
+export async function sauveActeurConcerne(lesDatas) {
+    const dataAffaireActeurConcerne = {
+        idAffaire: lesDatas.affaire.id,
+        acteursConcernes: lesDatas.affaire.acteurConcerne
+    }
+    const jdata = JSON.stringify(dataAffaireActeurConcerne)
+    const urlsaac = `${g_devurl}${g_pathurl}affaire_acteurconc_sauve.php`
+    const response = await axios.post(urlsaac, jdata, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+     .catch(function (error) {
+        lesDatas.messagesErreur.serverbackend = ref(traiteAxiosError(error))
+    })      
+    console.log(response.data)
+    //if (response.data.message.indexOf('ERREUR') == 0) {
+    //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
+    //}
+}
 
 function traiteAxiosError(error) {
     if (error.response) {

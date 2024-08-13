@@ -45,6 +45,17 @@
                     >+n</v-btn>
                   </template>        
                 </v-tooltip>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <v-tooltip text="sauver les données acteurs concernés" v-if="lesDatas.controle.dataActeurConcChange">
+                  <template v-slot:activator="{ props }">
+                      <v-btn
+                          v-bind="props"
+                          icon="mdi-database-arrow-left-outline"
+                          @click.stop="demandeSauveActeurConcerne()"
+                      />
+                  </template>        
+                </v-tooltip>
+
               </span> 
             </v-expansion-panel-title>
             <v-expansion-panel-text>
@@ -101,9 +112,11 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref } from 'vue'
+import { defineProps, toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import ActeurChoix from '../../../acteurchoix/src/components/ActeurChoix.vue'
+import { sauveActeurConcerne } from '@/axioscalls.js'
+
 const lesDatas = data()
 
 const props = defineProps({
@@ -133,6 +146,11 @@ const props = defineProps({
 })
 const { rolesdisp } = toRefs(props)
 const { roledefaut } = toRefs(props)
+
+watch(() => lesDatas.affaire.acteurConcerne, () => {
+  lesDatas.controle.dataActeurConcChange = true
+}, { deep: true })
+
 
 const modeChoixActeurConc = ref('unique')
 const panelActeurConcerne = ref([])
@@ -223,6 +241,10 @@ const supprimeLienActeur = (idAcRole, index) => {
     //???
   }
   lesDatas.affaire.acteurConcerne.splice(index,1)
+}
+
+const demandeSauveActeurConcerne = async () => {
+  await sauveActeurConcerne(lesDatas)
 }
 
 </script>
