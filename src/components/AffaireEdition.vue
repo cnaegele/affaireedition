@@ -3,6 +3,7 @@
     <AffaireIdType />
     <AffaireNom />
     <AffaireDescription />
+    <AffairesUnitesOrgConcernes />  
     <AffaireActeursConcernes 
       @infoActeur="infoActeur"
       :rolesdisp="[
@@ -49,6 +50,7 @@ import { defineProps, ref } from 'vue'
 import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'
+import AffairesUnitesOrgConcernes from '@/components/AffairesUnitesOrgConcernes.vue'
 import AffaireActeursConcernes from '@/components/AffaireActeursConcernes.vue'
 import ActeurData from '../../../acteurdata/src/components/ActeurData.vue'
 

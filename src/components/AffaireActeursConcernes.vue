@@ -55,7 +55,6 @@
                       />
                   </template>        
                 </v-tooltip>
-
               </span> 
             </v-expansion-panel-title>
             <v-expansion-panel-text>

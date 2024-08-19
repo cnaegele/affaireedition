@@ -25,6 +25,7 @@ export const data = defineStore({
         dateCreation: ref(''),
         dateDebut: ref(''),
         dateFin: ref(''),
+        uniteOrgConcerne: [],
         acteurConcerne: [],
         /*
           idacrole: ref(0),
@@ -38,6 +39,7 @@ export const data = defineStore({
     },
     controle: {
       dataChange: ref(false),
+      dataUniteOrgConcChange: ref(false),
       dataActeurConcChange: ref(false),
     },
     messagesErreur: {
