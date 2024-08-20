@@ -56,16 +56,15 @@
                 </v-tooltip>
               </span> 
             </v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <!--  
+            <v-expansion-panel-text>  
               <v-container>
-                <v-row v-for="(uniteOrgConcerne, index) in lesDatas.affaire.uniteOrgConcerne" :key="acteurConcerne.idacrole" class="d-flex align-center">
+                <v-row v-for="(uniteOrgConcerne, index) in lesDatas.affaire.uniteOrgConcerne" :key="index" class="d-flex align-center">
                  <v-col cols="12" md="3">
-                    {{ acteurConcerne.nom }}
+                    {{ uniteOrgConcerne.nomuo }}
                   </v-col>
-                  <v-col cols="12" md="3">
+                  <v-col cols="12" md="2">
                     <v-select
-                      v-model="lesDatas.affaire.acteurConcerne[index].idrole"
+                      v-model="lesDatas.affaire.uniteOrgConcerne[index].idrole"
                       :items="rolesdisp"
                       label="rôle"
                       item-title="label"
@@ -73,6 +72,13 @@
                       placeholder="Sélectionner un rôle"
                     ></v-select>                     
                   </v-col>
+                  <v-col cols="12" md="2">
+                    <input
+                      type="date"
+                      v-model="lesDatas.affaire.uniteOrgConcerne[index].datedebutparticipe"
+                    ></input>
+                  </v-col>
+                  <!--
                   <v-col cols="12" md="4">
                     <v-text-field
                       label="commentaire"
@@ -100,10 +106,10 @@
                         ></v-btn>
                       </template>        
                     </v-tooltip>
-                  </v-col>  
+                  </v-col>
+                -->  
                 </v-row>
               </v-container>
-            -->
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -117,6 +123,44 @@ import { data } from '@/stores/data.js'
 import UniteOrgChoix from '../../../uniteorgchoix/src/components/UniteOrgChoix.vue'
 
 const lesDatas = data()
+
+const props = defineProps({
+  rolesdisp: {
+    type: Array,
+    default() {
+      return [
+        {
+          id: 13,
+          label: 'Concerné',
+          value: '13'
+        },
+        {
+          id: 2,
+          label: 'Gestionnaire',
+          value: '2'
+        },
+        {
+          id: 7,
+          label: 'Leader',
+          value: '7'
+        },
+        {
+          id: 1,
+          label: 'Participe',
+          value: '1'
+        },
+      ]
+    }
+  },
+  roledefaut: {
+    type: String,
+    default() {
+      return '1'
+    }
+  }
+})
+const { rolesdisp } = toRefs(props)
+const { roledefaut } = toRefs(props)
 
 const modeChoixUniteOrgConc = ref('unique')
 const panelUniteOrgConcerne = ref([])

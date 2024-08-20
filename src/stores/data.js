@@ -26,6 +26,17 @@ export const data = defineStore({
         dateDebut: ref(''),
         dateFin: ref(''),
         uniteOrgConcerne: [],
+        /*
+          iduniteorg: ref(0),
+          bactif: ref(true),
+          nomuo: ref(''),
+          desctreeuo: ref(''),
+          idrole: ref(0),
+          role: ref(''),
+          datedebutparticipe: ref(''),
+          datefinparticipe: ref(''),
+          commentaire: ref(''),
+        */
         acteurConcerne: [],
         /*
           idacrole: ref(0),
