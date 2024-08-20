@@ -5,6 +5,21 @@
 .titreChampInfo {
     font-weight: bold;
 }
+
+.go_colsdate {
+    padding-top: 0px !important;
+}
+.go_divdate {
+    padding-top: 0px;
+    vertical-align: top;
+}
+.go_labeldate {
+    font-size: small;
+}
+.go_inpdate {
+    width: 12.8ch;
+}
+
 .messageErreur {
     color: rgb(161, 119, 119);
     font-weight: bold;

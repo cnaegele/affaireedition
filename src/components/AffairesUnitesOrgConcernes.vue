@@ -59,7 +59,7 @@
             <v-expansion-panel-text>  
               <v-container>
                 <v-row v-for="(uniteOrgConcerne, index) in lesDatas.affaire.uniteOrgConcerne" :key="index" class="d-flex align-center">
-                 <v-col cols="12" md="3">
+                 <v-col cols="12" md="2">
                     {{ uniteOrgConcerne.nomuo }}
                   </v-col>
                   <v-col cols="12" md="2">
@@ -72,19 +72,47 @@
                       placeholder="Sélectionner un rôle"
                     ></v-select>                     
                   </v-col>
-                  <v-col cols="12" md="2">
-                    <input
-                      type="date"
-                      v-model="lesDatas.affaire.uniteOrgConcerne[index].datedebutparticipe"
-                    ></input>
+                  
+                  <v-col cols="12" md="2" class="go_colsdate">
+                      <div class="go_labeldate">début participation</div> 
+                      <div class="go_divdate">
+                        <input
+                          type="date"
+                          class="go_inpdate"
+                          v-model="lesDatas.affaire.uniteOrgConcerne[index].datedebutparticipe"
+                        ></input>
+                      </div>
                   </v-col>
-                  <!--
-                  <v-col cols="12" md="4">
+                  <v-col cols="12" md="2" class="go_colsdate">
+                      <div class="go_labeldate">fin participation</div> 
+                      <div class="go_divdate">
+                        <input
+                          type="date"
+                          class="go_inpdate"
+                          v-model="lesDatas.affaire.uniteOrgConcerne[index].datefinparticipe"
+                        ></input>
+                      </div>
+                  </v-col>
+                  <v-col cols="12" md="3">
                     <v-text-field
                       label="commentaire"
-                      v-model="lesDatas.affaire.acteurConcerne[index].commentaire"
+                      v-model="lesDatas.affaire.uniteOrgConcerne[index].commentaire"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12" md="1">
+                    <v-tooltip text="supprimer le lien unité organisationelle">
+                      <template v-slot:activator="{ props }">
+                        <v-btn
+                          v-bind="props"
+                          icon="mdi-delete"
+                          variant="text"
+                          @click="supprimeLienUniteOrg(uniteOrgConcerne.iduo, uniteOrgConcerne.idrole, index)"
+                        ></v-btn>
+                      </template>        
+                    </v-tooltip>
+                  </v-col>
+                  <!--
+                  
                   <v-col cols="12" md="2">
                     <v-tooltip text="information acteur">
                       <template v-slot:activator="{ props }">
@@ -123,6 +151,7 @@ import { data } from '@/stores/data.js'
 import UniteOrgChoix from '../../../uniteorgchoix/src/components/UniteOrgChoix.vue'
 
 const lesDatas = data()
+const dateini = ref([null,null])
 
 const props = defineProps({
   rolesdisp: {

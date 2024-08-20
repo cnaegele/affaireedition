@@ -43,7 +43,7 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     let uoc_idUniteOrg, uoc_bactif, uoc_nomUniteOrg, uoc_descTreeUniteOrg, uoc_idRole, uoc_role, uoc_dateDebutParticipe, uoc_dateFinParticipe, uoc_commentaire
     if (oResponse.hasOwnProperty('UO')) {
         if (!Array.isArray(oResponse.UO)) {
-            aoActeurConcInp.push(oResponse.UO)    
+            aoUniteOrgConcInp.push(oResponse.UO)    
         } else {
             aoUniteOrgConcInp = oResponse.UO    
         }
@@ -69,7 +69,8 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
                 uoc_dateDebutParticipe = ''    
             }
             if (aoUniteOrgConcInp[i].hasOwnProperty('UODateFinParticipation')) {
-                uoc_dateFinParticipe = aoUniteOrgConcInp[i].UODateFinParticipation
+                dummydate = aoUniteOrgConcInp[i].UODateFinParticipation
+                uoc_dateDebutParticipe = `${dummydate.substring(6,10)}-${dummydate.substring(3,5)}-${dummydate.substring(0,2)}`
             } else {
                 uoc_dateFinParticipe = ''    
             }
@@ -87,6 +88,8 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
                 role: uoc_role,
                 datedebutparticipe: uoc_dateDebutParticipe,
                 datefinparticipe: uoc_dateFinParticipe,
+                //datedebutparticipe: null,
+                //datefinparticipe: null,
                 commentaire: uoc_commentaire,
             }
             aoUniteOrgConcOut.push(oUniteOrgConcOut) 
