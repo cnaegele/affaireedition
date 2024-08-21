@@ -106,36 +106,11 @@
                           v-bind="props"
                           icon="mdi-delete"
                           variant="text"
-                          @click="supprimeLienUniteOrg(uniteOrgConcerne.iduo, uniteOrgConcerne.idrole, index)"
+                          @click="supprimeLienUniteOrg(index)"
                         ></v-btn>
                       </template>        
                     </v-tooltip>
                   </v-col>
-                  <!--
-                  
-                  <v-col cols="12" md="2">
-                    <v-tooltip text="information acteur">
-                      <template v-slot:activator="{ props }">
-                        <v-btn
-                          v-bind="props"
-                          icon="mdi-information"
-                          variant="text"
-                          @click="infoActeur(acteurConcerne.idacteur)"
-                        ></v-btn>
-                      </template>        
-                    </v-tooltip>
-                    <v-tooltip text="supprimer le lien acteur">
-                      <template v-slot:activator="{ props }">
-                        <v-btn
-                          v-bind="props"
-                          icon="mdi-delete"
-                          variant="text"
-                          @click="supprimeLienActeur(acteurConcerne.idacrole, index)"
-                        ></v-btn>
-                      </template>        
-                    </v-tooltip>
-                  </v-col>
-                -->  
                 </v-row>
               </v-container>
             </v-expansion-panel-text>
@@ -149,6 +124,7 @@
 import { defineProps, toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import UniteOrgChoix from '../../../uniteorgchoix/src/components/UniteOrgChoix.vue'
+import { sauveUniteOrgConcerne } from '@/axioscalls.js'
 
 const lesDatas = data()
 const dateini = ref([null,null])
@@ -191,6 +167,10 @@ const props = defineProps({
 const { rolesdisp } = toRefs(props)
 const { roledefaut } = toRefs(props)
 
+watch(() => lesDatas.affaire.uniteOrgConcerne, () => {
+  lesDatas.controle.dataUniteOrgConcChange = true
+}, { deep: true })
+
 const modeChoixUniteOrgConc = ref('unique')
 const panelUniteOrgConcerne = ref([])
 const afficheChoixUniteOrg = ref(false)
@@ -211,5 +191,52 @@ const receptionUniteOrg = (jsonData) => {
   afficheChoixUniteOrg.value = false
   panelUniteOrgConcerne.value = [0]
 
+  const oUniteOrgRecu = JSON.parse(jsonData)
+  let aoUniteOrgRecu = []
+  let bactif = true
+  if (oUniteOrgRecu.bactif == 0) {
+    bactif = false  
+  }
+  if (!Array.isArray(oUniteOrgRecu)) {
+    aoUniteOrgRecu.push(oUniteOrgRecu)    
+  } else {
+    aoUniteOrgRecu = oUniteOrgRecu   
+  }
+  //console.log(aoUniteOrgRecu)
+  for (let i=0; i<aoUniteOrgRecu.length; i++) {
+    //On regarde si cette unité est déjà dans les unités organisationnelle concernées
+    const idUniteOrgRecu = aoUniteOrgRecu[i].id
+    let btrouve = false
+    for (let j=0; j<lesDatas.affaire.uniteOrgConcerne.length; j++) {
+      if (lesDatas.affaire.uniteOrgConcerne[j].iduniteorg == idUniteOrgRecu) {
+        btrouve = true
+      }
+    }
+
+    if (!btrouve) {
+      const oUniteOrgConcernePlus = {
+        "iduniteorg": idUniteOrgRecu,
+        "bactif": bactif,
+        "nomuo": aoUniteOrgRecu[i].description,
+        "desctreeuo": '',
+        "idrole": roledefaut.value.toString(),
+        "datedebutparticipe": '',
+        "datefinparticipe": '',
+        "commentaire": '',
+      }
+      lesDatas.affaire.uniteOrgConcerne.push(oUniteOrgConcernePlus)
+    } else {
+      alert(`Cette unité organisationnelle "${aoUniteOrgRecu[i].description}" fait déjà partie des unités organisationnelle concernées`)
+    }
+  }
+}
+
+const supprimeLienUniteOrg = (index) => {
+  lesDatas.affaire.uniteOrgConcerne.splice(index, 1)
+}
+
+const demandeSauveUniteOrgConcerne = async () => {
+  await sauveUniteOrgConcerne(lesDatas)
+  lesDatas.controle.dataUniteOrgConcChange = false
 }
 </script>

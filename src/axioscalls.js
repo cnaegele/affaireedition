@@ -137,6 +137,29 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     affaireDatas.acteurConcerne = ref(aoActeurConcOut)
 }
 
+export async function sauveUniteOrgConcerne(lesDatas) {
+    const dataAffaireUniteOrgConcerne = {
+        idAffaire: lesDatas.affaire.id,
+        unitesOrgConcernes: lesDatas.affaire.uniteOrgConcerne
+    }
+    const jdata = JSON.stringify(dataAffaireUniteOrgConcerne)
+    //console.log(jdata)
+    const urlsuoc = `${g_devurl}${g_pathurl}affaire_uniteorgconc_sauve.php`
+    const response = await axios.post(urlsuoc, jdata, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+     .catch(function (error) {
+        lesDatas.messagesErreur.serverbackend = ref(traiteAxiosError(error))
+    })      
+    console.log(response.data)
+    //if (response.data.message.indexOf('ERREUR') == 0) {
+    //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
+    //}
+}
+
+
 export async function sauveActeurConcerne(lesDatas) {
     const dataAffaireActeurConcerne = {
         idAffaire: lesDatas.affaire.id,

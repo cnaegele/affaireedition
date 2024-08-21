@@ -96,7 +96,7 @@
                           v-bind="props"
                           icon="mdi-delete"
                           variant="text"
-                          @click="supprimeLienActeur(acteurConcerne.idacrole, index)"
+                          @click="supprimeLienActeur(index)"
                         ></v-btn>
                       </template>        
                     </v-tooltip>
@@ -234,16 +234,13 @@ const receptionActeurConc = (idacteur, jsonData) => {
   }
 }
 
-const supprimeLienActeur = (idAcRole, index) => {
-  if (idAcRole > 0) {
-    //Mise à jour en base de donnée
-    //???
-  }
-  lesDatas.affaire.acteurConcerne.splice(index,1)
+const supprimeLienActeur = (index) => {
+  lesDatas.affaire.acteurConcerne.splice(index, 1)
 }
 
 const demandeSauveActeurConcerne = async () => {
   await sauveActeurConcerne(lesDatas)
+  lesDatas.controle.dataActeurConcChange = false
 }
 
 </script>
