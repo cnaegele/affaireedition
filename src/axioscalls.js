@@ -46,6 +46,12 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     affaireDatas.type = ref(oResponse.Type)
     affaireDatas.nom = ref(oResponse.Nom)
     affaireDatas.description = ref(oResponse.Description)
+    affaireDatas.dateDebut = ref(`${oResponse.DateDebut.substring(6,10)}-${oResponse.DateDebut.substring(3,5)}-${oResponse.DateDebut.substring(0,2)}`)
+    if (oResponse.hasOwnProperty('DateFin')) {
+        affaireDatas.dateFin = ref(`${oResponse.DateFin.substring(6,10)}-${oResponse.DateFin.substring(3,5)}-${oResponse.DateFin.substring(0,2)}`)
+    } else {
+        affaireDatas.dateFin = ref('')    
+    }
 
     let dummydate
 

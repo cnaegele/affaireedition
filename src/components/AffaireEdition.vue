@@ -3,6 +3,8 @@
     <AffaireIdType />
     <AffaireNom />
     <AffaireDescription />
+    <AffaireDateDebut />
+    <AffaireDateFin />
     <AffairesUnitesOrgConcernes />  
     <AffaireActeursConcernes 
       @infoActeur="infoActeur"
@@ -53,6 +55,8 @@ import { defineProps, ref } from 'vue'
 import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'
+import AffaireDateDebut from '@/components/AffaireDateDebut.vue'
+import AffaireDateFin from '@/components/AffaireDateFin.vue'
 import AffairesUnitesOrgConcernes from '@/components/AffairesUnitesOrgConcernes.vue'
 import AffaireActeursConcernes from '@/components/AffaireActeursConcernes.vue'
 import ActeurData from '../../../acteurdata/src/components/ActeurData.vue'

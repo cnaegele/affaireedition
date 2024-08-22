@@ -1,7 +1,7 @@
 <template>
     <v-row dense>
-        <v-col cols="12" md="1" class="titreChampSaisie">{{ label }}</v-col>
-        <v-col cols="12" md="11">
+        <v-col cols="12" md="2" class="titreChampSaisie">{{ label }}</v-col>
+        <v-col cols="12" md="10">
             <v-textarea
                 v-model="lesDatas.affaire.description"
                 rows="1"
