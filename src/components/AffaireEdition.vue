@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="droitUtilisateur == 'CONTROLETOTAL' || droitUtilisateur == 'EDITION'">
     <AffaireIdType />
     <AffaireNom />
     <AffaireDescription />
@@ -12,6 +12,9 @@
       ]"
     />
   </v-container>
+  <div class="messageErreur" v-else>
+    <v-container>Vous n'avez pas le droit d'éditer cette affaire (id: {{ affaireId }})</v-container>
+  </div>
   
   <v-dialog max-width="1280">
     <template v-slot:activator="{ props: activatorProps }">
@@ -55,22 +58,31 @@ import AffaireActeursConcernes from '@/components/AffaireActeursConcernes.vue'
 import ActeurData from '../../../acteurdata/src/components/ActeurData.vue'
 
 import { data } from '@/stores/data.js'
+import { getAffaireDroitUtilisateur } from '@/axioscalls.js'
 import { getAffaireData } from '@/axioscalls.js'
 const props = defineProps({
   affaireId: {
     type: Number
   }
 })
-const lesDatas = data()
+
 const affaireId = props.affaireId
+const droitUtilisateur = ref('NODROIT')
+const lesDatas = data()
+
+console.log(affaireId)
+
 if (affaireId !== '') {
-  console.log(affaireId)
-  await getAffaireData(affaireId, lesDatas.affaire)
+  await getAffaireDroitUtilisateur(affaireId, droitUtilisateur)
+}
+
+if (droitUtilisateur.value == 'CONTROLETOTAL' || droitUtilisateur.value == 'EDITION') {
+  if (affaireId !== '') { 
+    await getAffaireData(affaireId, lesDatas.affaire)
+  }
 }
 
 const acteurConcIdInfo = ref('0')
-
-
 
 const infoActeur = (acteurId) => {
   acteurConcIdInfo.value = acteurId.toString()

@@ -8,9 +8,8 @@
       <div v-if="lesDatas.user.bInGroupe == 1">
               <h2 style="text-align: center;">Edition affaire</h2>
          <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
-        
       </div>
-      <div>{{ JSON.stringify(lesDatas) }}</div>
+      <!--<div>{{ JSON.stringify(lesDatas) }}</div>-->
     </v-main>
 
     <AppFooter />

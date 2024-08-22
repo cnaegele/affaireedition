@@ -22,6 +22,17 @@ export async function getDataUserInfo(groupeSecurite, lesDatas) {
     lesDatas.user.bInGroupe = ref(userInfo.bingroupe)
 }
 
+export async function getAffaireDroitUtilisateur(prmIdAffaire, droitUtilisateur) {
+    const urladu = `${g_devurl}${g_pathurl}affaire_droit_utilisateur.php`
+    const params = new URLSearchParams([['idaffaire', prmIdAffaire]])
+    const response = await axios.get(urladu, { params })
+        .catch(function (error) {
+            return traiteAxiosError(error)
+        })
+    const oResponse = response.data
+    droitUtilisateur.value = oResponse.droit
+}
+
 export async function getAffaireData(prmIdAffaire, affaireDatas) {
     const urlad = `${g_devurl}${g_pathurl}affaire_data.php`
     const params = new URLSearchParams([['idaffaire', prmIdAffaire]])
