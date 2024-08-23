@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'

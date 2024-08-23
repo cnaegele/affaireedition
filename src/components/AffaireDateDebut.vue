@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 const lesDatas = data()
 const props = defineProps({

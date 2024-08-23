@@ -121,7 +121,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref, watch } from 'vue'
+import { toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import UniteOrgChoix from '../../../uniteorgchoix/src/components/UniteOrgChoix.vue'
 import { sauveUniteOrgConcerne } from '@/axioscalls.js'

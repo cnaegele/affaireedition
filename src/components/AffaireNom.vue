@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { defineProps, watch } from 'vue'
+import { watch } from 'vue'
 import { data } from '@/stores/data.js'
 const lesDatas = data()
 const props = defineProps({

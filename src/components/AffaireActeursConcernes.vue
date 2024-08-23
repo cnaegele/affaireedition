@@ -111,7 +111,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, ref, watch } from 'vue'
+import { toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import ActeurChoix from '../../../acteurchoix/src/components/ActeurChoix.vue'
 import { sauveActeurConcerne } from '@/axioscalls.js'

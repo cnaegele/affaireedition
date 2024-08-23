@@ -1,19 +1,19 @@
 <template>
   <v-app>
+    <AppToper />
+
     <v-main>
-      <div><Suspense><UserInformation groupeSecurite="AffaireManager"></UserInformation></Suspense></div>
       <div v-if="lesDatas.user.bInGroupe == 0">
         Utilisation autoris&eacute;e uniquement aux membres du groupe {{ lesDatas.user.groupeSecurite }}
       </div>
       <div v-if="lesDatas.user.bInGroupe == 1">
-              <h2 style="text-align: center;">Edition affaire</h2>
          <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
       </div>
       <!--<div>{{ JSON.stringify(lesDatas) }}</div>-->
     </v-main>
 
     <AppFooter />
-  </v-app>
+</v-app>
 </template>
 
 <script setup>
