@@ -1,10 +1,11 @@
 <template>
     <v-row >
-        <v-col cols="12" md="2" class="titreChampSaisie go_colsdate">{{ label }}</v-col>
+        <v-col cols="12" md="2" class="titreChampSaisie">{{ label }}</v-col>
         <v-col cols="12" md="10">
             <div class="go_divdate">
                 <input
                     type="date"
+                    class="go_input"
                     v-model="lesDatas.affaire.dateFin"
                 ></input>
             </div>

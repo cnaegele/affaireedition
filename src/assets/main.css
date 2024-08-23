@@ -19,7 +19,19 @@
 .go_inpdate {
     width: 12.8ch;
 }
-
+.go_input {
+    background-color: rgb(var(--v-theme-surface));
+    /* Ajout d'un overlay similaire à celui utilisé par Vuetify */
+    box-shadow: inset 0 0 0 100vmax rgba(var(--v-theme-on-surface), 0.027);
+    border-bottom: thin solid rgba(var(--v-theme-on-surface), 0.38);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}.go_input:hover {
+    background-color: rgb(var(--v-theme-surface));
+    box-shadow: inset 0 0 0 100vmax rgba(var(--v-theme-on-surface), 0.07);
+}
 .messageErreur {
     color: rgb(161, 119, 119);
     font-weight: bold;
