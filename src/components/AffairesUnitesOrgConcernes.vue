@@ -50,7 +50,7 @@
                       <v-btn
                           v-bind="props"
                           icon="mdi-database-arrow-left-outline"
-                          @click.stop="demandeSauveUniteOrgConcerne()"
+                          @click.stop="demandeSauveData('uniteorg')"
                       />
                   </template>        
                 </v-tooltip>
@@ -124,7 +124,7 @@
 import { toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import UniteOrgChoix from '../../../uniteorgchoix/src/components/UniteOrgChoix.vue'
-import { sauveUniteOrgConcerne } from '@/axioscalls.js'
+import { demandeSauveData } from '@/sauve.js'
 
 const lesDatas = data()
 const dateini = ref([null,null])
@@ -169,6 +169,7 @@ const { roledefaut } = toRefs(props)
 
 watch(() => lesDatas.affaire.uniteOrgConcerne, () => {
   lesDatas.controle.dataUniteOrgConcChange = true
+  lesDatas.controle.dataChange = true
 }, { deep: true })
 
 const modeChoixUniteOrgConc = ref('unique')
@@ -235,8 +236,4 @@ const supprimeLienUniteOrg = (index) => {
   lesDatas.affaire.uniteOrgConcerne.splice(index, 1)
 }
 
-const demandeSauveUniteOrgConcerne = async () => {
-  await sauveUniteOrgConcerne(lesDatas)
-  lesDatas.controle.dataUniteOrgConcChange = false
-}
 </script>

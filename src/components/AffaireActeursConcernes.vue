@@ -51,7 +51,7 @@
                       <v-btn
                           v-bind="props"
                           icon="mdi-database-arrow-left-outline"
-                          @click.stop="demandeSauveActeurConcerne()"
+                          @click.stop="demandeSauveData('acteur')"
                       />
                   </template>        
                 </v-tooltip>
@@ -114,8 +114,7 @@
 import { toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import ActeurChoix from '../../../acteurchoix/src/components/ActeurChoix.vue'
-import { sauveActeurConcerne } from '@/axioscalls.js'
-
+import { demandeSauveData } from '@/sauve.js'
 const lesDatas = data()
 
 const props = defineProps({
@@ -148,6 +147,7 @@ const { roledefaut } = toRefs(props)
 
 watch(() => lesDatas.affaire.acteurConcerne, () => {
   lesDatas.controle.dataActeurConcChange = true
+  lesDatas.controle.dataChange = true
 }, { deep: true })
 
 
@@ -237,10 +237,4 @@ const receptionActeurConc = (idacteur, jsonData) => {
 const supprimeLienActeur = (index) => {
   lesDatas.affaire.acteurConcerne.splice(index, 1)
 }
-
-const demandeSauveActeurConcerne = async () => {
-  await sauveActeurConcerne(lesDatas)
-  lesDatas.controle.dataActeurConcChange = false
-}
-
 </script>

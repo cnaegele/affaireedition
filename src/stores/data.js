@@ -17,14 +17,17 @@ export const data = defineStore({
         bInGroupe: ref(0),
     },
     affaire: {
-        id: ref(0),
-        idType: ref(0),
-        type: ref(''),
-        nom: ref(''),
-        description: ref(''),
-        dateCreation: ref(''),
-        dateDebut: ref(''),
-        dateFin: ref(''),
+        gen: {
+          id: ref(0),
+          idType: ref(0),
+          type: ref(''),
+          nom: ref(''),
+          description: ref(''),
+          commentaire: ref(''),
+          dateCreation: ref(''),
+          dateDebut: ref(''),
+          dateFin: ref(''),
+        },
         uniteOrgConcerne: [],
         /*
           iduniteorg: ref(0),
@@ -50,6 +53,7 @@ export const data = defineStore({
     },
     controle: {
       dataChange: ref(false),
+      dataGenChange: ref(false),
       dataUniteOrgConcChange: ref(false),
       dataActeurConcChange: ref(false),
     },

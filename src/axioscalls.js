@@ -42,15 +42,24 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
         })
     const oResponse = response.data
     console.log(oResponse)
-    affaireDatas.id = ref(oResponse.IdAffaire)
-    affaireDatas.type = ref(oResponse.Type)
-    affaireDatas.nom = ref(oResponse.Nom)
-    affaireDatas.description = ref(oResponse.Description)
-    affaireDatas.dateDebut = ref(`${oResponse.DateDebut.substring(6,10)}-${oResponse.DateDebut.substring(3,5)}-${oResponse.DateDebut.substring(0,2)}`)
-    if (oResponse.hasOwnProperty('DateFin')) {
-        affaireDatas.dateFin = ref(`${oResponse.DateFin.substring(6,10)}-${oResponse.DateFin.substring(3,5)}-${oResponse.DateFin.substring(0,2)}`)
+    affaireDatas.gen.id = ref(oResponse.IdAffaire)
+    affaireDatas.gen.type = ref(oResponse.Type)
+    affaireDatas.gen.nom = ref(oResponse.Nom)
+    if (oResponse.hasOwnProperty('Description')) {
+        affaireDatas.gen.description = ref(oResponse.Description)
     } else {
-        affaireDatas.dateFin = ref('')    
+        affaireDatas.gen.description = ref('')    
+    }
+    if (oResponse.hasOwnProperty('Commentaire')) {
+        affaireDatas.gen.commentaire = ref(oResponse.Commentaire)
+    } else {
+        affaireDatas.gen.commentaire = ref('')    
+    }
+    affaireDatas.gen.dateDebut = ref(`${oResponse.DateDebut.substring(6,10)}-${oResponse.DateDebut.substring(3,5)}-${oResponse.DateDebut.substring(0,2)}`)
+    if (oResponse.hasOwnProperty('DateFin')) {
+        affaireDatas.gen.dateFin = ref(`${oResponse.DateFin.substring(6,10)}-${oResponse.DateFin.substring(3,5)}-${oResponse.DateFin.substring(0,2)}`)
+    } else {
+        affaireDatas.gen.dateFin = ref('')    
     }
 
     let dummydate
@@ -154,13 +163,32 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     affaireDatas.acteurConcerne = ref(aoActeurConcOut)
 }
 
+export async function sauveDataGen(lesDatas) {
+    const jdata = JSON.stringify(lesDatas.affaire.gen)
+    console.log(jdata)
+    /*
+    const urlsdg = `${g_devurl}${g_pathurl}affaire_datagenerique_sauve.php`
+    const response = await axios.post(urlsdg, jdata, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+     .catch(function (error) {
+        lesDatas.messagesErreur.serverbackend = ref(traiteAxiosError(error))
+    })      
+    console.log(response.data)
+    */
+    //if (response.data.message.indexOf('ERREUR') == 0) {
+    //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
+    //}
+}
 export async function sauveUniteOrgConcerne(lesDatas) {
     const dataAffaireUniteOrgConcerne = {
-        idAffaire: lesDatas.affaire.id,
+        idAffaire: lesDatas.affaire.gen.id,
         unitesOrgConcernes: lesDatas.affaire.uniteOrgConcerne
     }
     const jdata = JSON.stringify(dataAffaireUniteOrgConcerne)
-    //console.log(jdata)
+    console.log(jdata)
     const urlsuoc = `${g_devurl}${g_pathurl}affaire_uniteorgconc_sauve.php`
     const response = await axios.post(urlsuoc, jdata, {
         headers: {
@@ -178,7 +206,7 @@ export async function sauveUniteOrgConcerne(lesDatas) {
 
 export async function sauveActeurConcerne(lesDatas) {
     const dataAffaireActeurConcerne = {
-        idAffaire: lesDatas.affaire.id,
+        idAffaire: lesDatas.affaire.gen.id,
         acteursConcernes: lesDatas.affaire.acteurConcerne
     }
     const jdata = JSON.stringify(dataAffaireActeurConcerne)

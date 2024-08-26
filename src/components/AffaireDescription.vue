@@ -3,7 +3,7 @@
         <v-col cols="12" md="2" class="titreChampSaisie">{{ label }}</v-col>
         <v-col cols="12" md="10">
             <v-textarea
-                v-model="lesDatas.affaire.description"
+                v-model="lesDatas.affaire.gen.description"
                 rows="1"
                 auto-grow
             ></v-textarea>                        
@@ -22,7 +22,8 @@ const props = defineProps({
     }
 })
 
-watch(() => lesDatas.affaire.description, () => {
-    console.log(`nom : ${lesDatas.affaire.description}`)
+watch(() => lesDatas.affaire.gen.description, () => {
+    lesDatas.controle.dataGenChange = true
+    lesDatas.controle.dataChange = true
 })
 </script>

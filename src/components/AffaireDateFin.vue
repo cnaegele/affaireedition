@@ -6,7 +6,7 @@
                 <input
                     type="date"
                     class="go_input"
-                    v-model="lesDatas.affaire.dateFin"
+                    v-model="lesDatas.affaire.gen.dateFin"
                 ></input>
             </div>
         </v-col>
@@ -24,7 +24,8 @@ const props = defineProps({
     }
 })
 
-watch(() => lesDatas.affaire.dateFin, () => {
-    console.log(`dateDebut : ${lesDatas.affaire.dateFin}`)
+watch(() => lesDatas.affaire.gen.dateFin, () => {
+    lesDatas.controle.dataGenChange = true
+    lesDatas.controle.dataChange = true
 })
 </script>
