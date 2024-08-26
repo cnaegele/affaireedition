@@ -166,7 +166,6 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
 export async function sauveDataGen(lesDatas) {
     const jdata = JSON.stringify(lesDatas.affaire.gen)
     console.log(jdata)
-    /*
     const urlsdg = `${g_devurl}${g_pathurl}affaire_datagenerique_sauve.php`
     const response = await axios.post(urlsdg, jdata, {
         headers: {
@@ -177,7 +176,6 @@ export async function sauveDataGen(lesDatas) {
         lesDatas.messagesErreur.serverbackend = ref(traiteAxiosError(error))
     })      
     console.log(response.data)
-    */
     //if (response.data.message.indexOf('ERREUR') == 0) {
     //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
     //}
