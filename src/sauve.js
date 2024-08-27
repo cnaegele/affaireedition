@@ -5,8 +5,15 @@ export const demandeSauveData = async (provenance) => {
     const lesDatas = data()
 
     if (lesDatas.controle.dataGenChange && provenance == 'general') {
-        await sauveDataGen(lesDatas)
-        lesDatas.controle.dataGenChange = false
+        if (lesDatas.bdataGenOK) {
+            lesDatas.affaire.gen.nom = lesDatas.affaire.gen.nom.trim()
+            lesDatas.affaire.gen.description = lesDatas.affaire.gen.description.trim()
+            lesDatas.affaire.gen.commentaire = lesDatas.affaire.gen.commentaire.trim()
+            await sauveDataGen(lesDatas)
+            lesDatas.controle.dataGenChange = false
+        } else {
+            alert("Il faut corriger les données invalides avant de pouvoir sauver !")
+        }
     }
     
     if (lesDatas.controle.dataUniteOrgConcChange && (provenance == 'general' || provenance == 'uniteorg')) {
@@ -21,7 +28,7 @@ export const demandeSauveData = async (provenance) => {
     
     let nbrCtrl2Change = 0
     for (const [key, value] of Object.entries(lesDatas.controle)) {
-        if (value === true) {
+        if ( key.indexOf('Change') > 1 &&  value === true) {
             nbrCtrl2Change++    
         }
     }

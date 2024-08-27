@@ -15,7 +15,7 @@
 
         <v-toolbar-title>Edition affaire</v-toolbar-title>
     
-        <v-tooltip text="sauver les données" v-if="lesDatas.controle.dataGenChange || lesDatas.controle.dataChange">
+        <v-tooltip text="sauver les données" v-if="lesDatas.bdataGenOK && (lesDatas.controle.dataGenChange || lesDatas.controle.dataChange)">
             <template v-slot:activator="{ props }">
                 <v-btn
                     v-bind="props"

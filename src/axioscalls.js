@@ -61,6 +61,11 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
     } else {
         affaireDatas.gen.dateFin = ref('')    
     }
+    if (oResponse.BTermine === '0') {
+        affaireDatas.gen.bTermine = false   
+    } else {
+        affaireDatas.gen.bTermine = true   
+    }
 
     let dummydate
 

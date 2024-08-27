@@ -4,6 +4,7 @@
     <AffaireNom />
     <AffaireDescription />
     <AffaireCommentaire />
+    <AffaireEtat />
     <AffaireDateDebut />
     <AffaireDateFin />
     <AffairesUnitesOrgConcernes />  
@@ -57,6 +58,7 @@ import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'
 import AffaireCommentaire from '@/components/AffaireCommentaire.vue'
+import AffaireEtat from '@/components/AffaireEtat.vue'
 import AffaireDateDebut from '@/components/AffaireDateDebut.vue'
 import AffaireDateFin from '@/components/AffaireDateFin.vue'
 import AffairesUnitesOrgConcernes from '@/components/AffairesUnitesOrgConcernes.vue'

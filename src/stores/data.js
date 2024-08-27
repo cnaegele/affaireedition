@@ -27,6 +27,7 @@ export const data = defineStore({
           dateCreation: ref(''),
           dateDebut: ref(''),
           dateFin: ref(''),
+          bTermine: ref(false)
         },
         uniteOrgConcerne: [],
         /*
@@ -54,13 +55,29 @@ export const data = defineStore({
     controle: {
       dataChange: ref(false),
       dataGenChange: ref(false),
+      bdataGenNomOK: ref(true),
+      bdataGenDateDebutOK: ref(true),
+      bdataGenDateFinOK: ref(true),
       dataUniteOrgConcChange: ref(false),
+      bdataUniteOrgConcOK: ref(true),
       dataActeurConcChange: ref(false),
+      bdataActeurConcOK: ref(true),
     },
     messagesErreur: {
-      dataRue: ref(''),
-      dataAdresse: ref(''),
+      dateDebut: ref(''),
+      dateFin: ref(''),
       serverbackend: ref(''),
     }, 
-  })
+  }),
+  getters: {
+    bdataGenOK: (state)  => {
+      if (state.controle.bdataGenNomOK 
+          && state.controle.bdataGenDateDebutOK
+          && state.controle.bdataGenDateFinOK) {
+        return true
+      } else {
+        return false
+      }
+    }  
+  }
 })
