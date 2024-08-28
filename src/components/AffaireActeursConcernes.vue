@@ -115,6 +115,7 @@ import { toRefs, ref, watch } from 'vue'
 import { data } from '@/stores/data.js'
 import ActeurChoix from '../../../acteurchoix/src/components/ActeurChoix.vue'
 import { demandeSauveData } from '@/sauve.js'
+import {detectIdenticalObjects} from '../../../cnlib/cnutils.js'
 const lesDatas = data()
 
 const props = defineProps({
@@ -146,10 +147,28 @@ const { rolesdisp } = toRefs(props)
 const { roledefaut } = toRefs(props)
 
 watch(() => lesDatas.affaire.acteurConcerne, () => {
-  lesDatas.controle.dataActeurConcChange = true
-  lesDatas.controle.dataChange = true
+  //Comme on peut mettre plusieurs fois le même acteur avec des rôles différents
+  //il faut verifier qu'un changement de rôle n'a pas créé un doublon
+  //Et il n'y a pas d'évènement change pour le v-select
+  const aacteurRole = []
+  let oar
+  for (let i=0; i<lesDatas.affaire.acteurConcerne.length; i++) {
+    oar= {
+      idacteur: lesDatas.affaire.acteurConcerne[i].idacteur.toString(),
+      idrole: lesDatas.affaire.acteurConcerne[i].idrole.toString(),
+      nom: lesDatas.affaire.acteurConcerne[i].nom,
+    }    
+    aacteurRole.push(oar)
+  }
+  const acteurRoleIdentique = detectIdenticalObjects(aacteurRole)
+  if (acteurRoleIdentique.length === 0) {
+    lesDatas.controle.dataActeurConcChange = true
+    lesDatas.controle.dataChange = true
+  } else {
+    lesDatas.controle.dataActeurConcChange = false
+    alert(`L'acteur ${acteurRoleIdentique[0].nom} a 2 rôles identiques. Sauvegarde des données acteurs concernés impossible`)
+  }
 }, { deep: true })
-
 
 const modeChoixActeurConc = ref('unique')
 const panelActeurConcerne = ref([])
