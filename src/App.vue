@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-snackbar
+      color="#FFCDD2"
+      location="center"
       v-model="lesDatas.messagesErreur.bSnackbar"
       :timeout="lesDatas.messagesErreur.timeOutSnackbar"
     >
       {{ lesDatas.messagesErreur.messageSnackbar }}
       <template v-slot:actions>
         <v-btn
-          color="blue"
-          text
-          @click="lesDatas.messagesErreur.bSnackbar = false"
-        >
-          Fermer
-        </v-btn>
+          text="Fermer"
+          variant="tonal"
+         @click="lesDatas.messagesErreur.bSnackbar = false"
+        ></v-btn>
       </template>
     </v-snackbar>
     <AppToper />

@@ -49,6 +49,8 @@ watch(() => lesDatas.affaire.gen.dateFin, () => {
         } else {
             lesDatas.affaire.gen.bTermine = false    
         }
+    } else {
+        lesDatas.affaire.gen.bTermine = false    
     }
     lesDatas.controle.dataGenChange = true
     lesDatas.controle.dataChange = true

@@ -31,7 +31,6 @@ const nomRules = [
     value => {
         if (value.trim().length >= 5) {
             lesDatas.controle.bdataGenNomOK = true
-            console.log(lesDatas.bdataGenOK)
             return true
         }
         lesDatas.controle.bdataGenNomOK = false
