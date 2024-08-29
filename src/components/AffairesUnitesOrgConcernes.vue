@@ -227,7 +227,8 @@ const receptionUniteOrg = (jsonData) => {
       }
       lesDatas.affaire.uniteOrgConcerne.push(oUniteOrgConcernePlus)
     } else {
-      alert(`Cette unité organisationnelle "${aoUniteOrgRecu[i].description}" fait déjà partie des unités organisationnelle concernées`)
+      lesDatas.messagesErreur.messageSnackbar = `Cette unité organisationnelle "${aoUniteOrgRecu[i].description}" fait déjà partie des unités organisationnelle concernées`
+      lesDatas.messagesErreur.bSnackbar = true
     }
   }
 }

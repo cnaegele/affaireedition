@@ -166,7 +166,8 @@ watch(() => lesDatas.affaire.acteurConcerne, () => {
     lesDatas.controle.dataChange = true
   } else {
     lesDatas.controle.dataActeurConcChange = false
-    alert(`L'acteur ${acteurRoleIdentique[0].nom} a 2 rôles identiques. Sauvegarde des données acteurs concernés impossible`)
+    lesDatas.messagesErreur.messageSnackbar = `L'acteur ${acteurRoleIdentique[0].nom} a 2 rôles identiques. Sauvegarde des données acteurs concernés impossible`
+    lesDatas.messagesErreur.bSnackbar = true
   }
 }, { deep: true })
 
@@ -248,7 +249,8 @@ const receptionActeurConc = (idacteur, jsonData) => {
       //Mise à jour en base de donnée
       //???
     } else {
-      alert(`Pas de rôle disponible pour l'acteur ${aoActeurRecu[i].acteurnom} qui fait déjà partie des acteurs concernés`)
+      lesDatas.messagesErreur.messageSnackbar = `Pas de rôle disponible pour l'acteur ${aoActeurRecu[i].acteurnom} qui fait déjà partie des acteurs concernés`
+      lesDatas.messagesErreur.bSnackbar = true
     }
   }
 }

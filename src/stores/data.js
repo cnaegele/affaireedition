@@ -64,6 +64,9 @@ export const data = defineStore({
       bdataActeurConcOK: ref(true),
     },
     messagesErreur: {
+      bSnackbar: ref(false),
+      timeOutSnackbar: ref(10000),
+      messageSnackbar: ref(''),
       dateDebut: ref(''),
       dateFin: ref(''),
       serverbackend: ref(''),
