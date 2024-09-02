@@ -7,7 +7,8 @@
     <AffaireEtat />
     <AffaireDateDebut />
     <AffaireDateFin />
-    <AffairesUnitesOrgConcernes />  
+    <AffaireEmployesConcernes />  
+    <AffaireUnitesOrgConcernes />  
     <AffaireActeursConcernes 
       @infoActeur="infoActeur"
       :rolesdisp="[
@@ -61,7 +62,8 @@ import AffaireCommentaire from '@/components/AffaireCommentaire.vue'
 import AffaireEtat from '@/components/AffaireEtat.vue'
 import AffaireDateDebut from '@/components/AffaireDateDebut.vue'
 import AffaireDateFin from '@/components/AffaireDateFin.vue'
-import AffairesUnitesOrgConcernes from '@/components/AffairesUnitesOrgConcernes.vue'
+import AffaireEmployesConcernes from '@/components/AffaireEmployesConcernes.vue'
+import AffairesUnitesOrgConcernes from '@/components/AffaireUnitesOrgConcernes.vue'
 import AffaireActeursConcernes from '@/components/AffaireActeursConcernes.vue'
 import ActeurData from '../../../acteurdata/src/components/ActeurData.vue'
 

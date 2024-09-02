@@ -29,6 +29,8 @@ export const data = defineStore({
           dateFin: ref(''),
           bTermine: ref(false)
         },
+        employeConcerne: [],
+
         uniteOrgConcerne: [],
         /*
           iduniteorg: ref(0),
