@@ -11,7 +11,7 @@ export async function getDataUserInfo(groupeSecurite, lesDatas) {
     const params = new URLSearchParams([['groupesecurite', groupeSecurite]])
     const response = await axios.get(urlui, { params })
         .catch(function (error) {
-            traiteAxiosError(error, lesData)
+            traiteAxiosError(error, lesDatas)
         })   
     const userInfo = response.data
     lesDatas.user.idEmployeUser = ref(userInfo.id_employe)

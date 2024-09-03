@@ -11,8 +11,8 @@
     "axios": "^1.7.3",
     "pinia": "^2.2.0",
     "roboto-fontface": "*",
-    "vue": "^3.4.31",
-    "vuetify": "^3.6.11"
+    "vue": "^3.4.38",
+    "vuetify": "^3.7.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",

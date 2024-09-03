@@ -59,7 +59,9 @@
             <v-expansion-panel-text>  
               <v-container>
                 <v-row v-for="(uniteOrgConcerne, index) in lesDatas.affaire.uniteOrgConcerne" :key="index" class="d-flex align-center">
-                 <v-col cols="12" md="2">
+                 <v-col cols="12" md="2"
+                    :class="{ 'eldesactive' : !uniteOrgConcerne.bactif, }"
+                  >
                     {{ uniteOrgConcerne.nomuo }}
                   </v-col>
                   <v-col cols="12" md="2">

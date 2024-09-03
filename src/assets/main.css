@@ -5,6 +5,10 @@
 .titreChampInfo {
     font-weight: bold;
 }
+.eldesactive {
+    font-style: italic;
+    color: rgb(170, 47, 47)    
+}
 
 .go_colsdate {
     padding-top: 0px !important;

@@ -1,3 +1,8 @@
+<style scoped>
+.descuo {
+  font-size: small;
+}
+</style>
 <template>
     <v-row v-if="afficheChoixEmploye" class="border-solid border-1">
       <v-col cols="12" md="12">
@@ -59,8 +64,11 @@
             <v-expansion-panel-text>  
               <v-container>
                 <v-row v-for="(employeConcerne, index) in lesDatas.affaire.employeConcerne" :key="index" class="d-flex align-center">
-                 <v-col cols="12" md="2">
+                  <v-col cols="12" md="2"
+                    :class="{ 'eldesactive' : !employeConcerne.bactif, }"
+                  >
                     {{ employeConcerne.nom }}
+                    <br><span class="descuo">{{ employeConcerne.uniteorg }}</span>
                   </v-col>
                   <v-col cols="12" md="2">
                     <v-select

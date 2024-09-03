@@ -60,7 +60,9 @@
             <v-expansion-panel-text>
               <v-container>
                 <v-row v-for="(acteurConcerne, index) in lesDatas.affaire.acteurConcerne" :key="acteurConcerne.idacrole" class="d-flex align-center">
-                 <v-col cols="12" md="3">
+                 <v-col cols="12" md="3"
+                    :class="{ 'eldesactive' : !acteurConcerne.bactif, }"
+                  >
                     {{ acteurConcerne.nom }}
                   </v-col>
                   <v-col cols="12" md="3">
