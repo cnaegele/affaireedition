@@ -69,6 +69,61 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
 
     let dummydate
 
+    //employés concernés
+    let aoEmployeConcInp = [] , aoEmployeConcOut = [], oEmployeConcOut
+    let empc_idEmploye, empc_bactif, empc_nom, empc_uniteOrg, empc_idRole, empc_role, empc_dateDebutParticipe, empc_dateFinParticipe, empc_commentaire
+    if (oResponse.hasOwnProperty('Emp')) {
+        if (!Array.isArray(oResponse.Emp)) {
+            aoEmployeConcInp.push(oResponse.Emp)    
+        } else {
+            aoEmployeConcInp = oResponse.Emp    
+        }
+        for (let i=0; i<aoEmployeConcInp.length; i++) {
+            empc_idEmploye = aoEmployeConcInp[i].EmpId
+            if (aoEmployeConcInp[i].EmpBActif == 1) {
+                empc_bactif = true    
+            } else {
+                empc_bactif = false    
+            }
+            empc_nom = aoEmployeConcInp[i].EmpNom  
+            empc_uniteOrg = aoEmployeConcInp[i].EmpUniteOrg  
+            empc_idRole = aoEmployeConcInp[i].EmpIdRole    
+            empc_role = aoEmployeConcInp[i].EmpRole
+            if (aoEmployeConcInp[i].hasOwnProperty('EmpDateDebParticipation')) {
+                dummydate = aoEmployeConcInp[i].EmpDateDebParticipation
+                empc_dateDebutParticipe = `${dummydate.substring(6,10)}-${dummydate.substring(3,5)}-${dummydate.substring(0,2)}`
+            } else {
+                empc_dateDebutParticipe = ''    
+            }
+            if (aoEmployeConcInp[i].hasOwnProperty('EmpDateFinParticipation')) {
+                dummydate = aoEmployeConcInp[i].EmpDateFinParticipation
+                empc_dateFinParticipe = `${dummydate.substring(6,10)}-${dummydate.substring(3,5)}-${dummydate.substring(0,2)}`
+            } else {
+                empc_dateFinParticipe = ''    
+            }
+            if (aoEmployeConcInp[i].hasOwnProperty('EmpCommentaire')) {
+                empc_commentaire = aoEmployeConcInp[i].EmpCommentaire
+            } else {
+                empc_commentaire = ''    
+            }
+            oEmployeConcOut = {
+                idemploye: empc_idEmploye,
+                bactif: empc_bactif,
+                nom: empc_nom,
+                uniteorg: empc_uniteOrg,
+                idrole: empc_idRole,
+                role: empc_role,
+                datedebutparticipe: empc_dateDebutParticipe,
+                datefinparticipe: empc_dateFinParticipe,
+                commentaire: empc_commentaire,
+            }
+            aoEmployeConcOut.push(oEmployeConcOut) 
+        }
+        affaireDatas.employeConcerne = ref(aoEmployeConcOut)        
+    }
+    //console.log(affaireDatas.employeConcerne)
+
+
     //unités organisationnelles concernée 
     let aoUniteOrgConcInp = [] , aoUniteOrgConcOut = [], oUniteOrgConcOut
     let uoc_idUniteOrg, uoc_bactif, uoc_nomUniteOrg, uoc_descTreeUniteOrg, uoc_idRole, uoc_role, uoc_dateDebutParticipe, uoc_dateFinParticipe, uoc_commentaire
@@ -119,8 +174,6 @@ export async function getAffaireData(prmIdAffaire, affaireDatas) {
                 role: uoc_role,
                 datedebutparticipe: uoc_dateDebutParticipe,
                 datefinparticipe: uoc_dateFinParticipe,
-                //datedebutparticipe: null,
-                //datefinparticipe: null,
                 commentaire: uoc_commentaire,
             }
             aoUniteOrgConcOut.push(oUniteOrgConcOut) 
@@ -185,6 +238,28 @@ export async function sauveDataGen(lesDatas) {
     //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
     //}
 }
+export async function sauveEmployeConcerne(lesDatas) {
+    const dataAffaireEmployeConcerne = {
+        idAffaire: lesDatas.affaire.gen.id,
+        employesConcernes: lesDatas.affaire.employeConcerne
+    }
+    const jdata = JSON.stringify(dataAffaireEmployeConcerne)
+    console.log(jdata)
+    const urlsemc = `${g_devurl}${g_pathurl}affaire_employeconc_sauve.php`
+    const response = await axios.post(urlsemc, jdata, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+     .catch(function (error) {
+        lesDatas.messagesErreur.serverbackend = ref(traiteAxiosError(error))
+    })      
+    console.log(response.data)
+    //if (response.data.message.indexOf('ERREUR') == 0) {
+    //    lesDatas.messagesErreur.serverbackend = ref(response.data.message)   
+    //}
+}
+
 export async function sauveUniteOrgConcerne(lesDatas) {
     const dataAffaireUniteOrgConcerne = {
         idAffaire: lesDatas.affaire.gen.id,

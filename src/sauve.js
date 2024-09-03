@@ -1,5 +1,5 @@
 import { data } from '@/stores/data.js'
-import { sauveDataGen, sauveUniteOrgConcerne, sauveActeurConcerne } from '@/axioscalls.js'
+import { sauveDataGen, sauveEmployeConcerne, sauveUniteOrgConcerne, sauveActeurConcerne } from '@/axioscalls.js'
 
 export const demandeSauveData = async (provenance) => {
     const lesDatas = data()
@@ -16,6 +16,11 @@ export const demandeSauveData = async (provenance) => {
         }
     }
     
+    if (lesDatas.controle.dataEmployeConcChange && (provenance == 'general' || provenance == 'employe')) {
+        await sauveEmployeConcerne(lesDatas)
+        lesDatas.controle.dataEmployeConcChange = false
+    }
+
     if (lesDatas.controle.dataUniteOrgConcChange && (provenance == 'general' || provenance == 'uniteorg')) {
         await sauveUniteOrgConcerne(lesDatas)
         lesDatas.controle.dataUniteOrgConcChange = false

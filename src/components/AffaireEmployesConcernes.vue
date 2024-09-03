@@ -60,11 +60,11 @@
               <v-container>
                 <v-row v-for="(employeConcerne, index) in lesDatas.affaire.employeConcerne" :key="index" class="d-flex align-center">
                  <v-col cols="12" md="2">
-                    {{ uniteOrgConcerne.nomuo }}
+                    {{ employeConcerne.nom }}
                   </v-col>
                   <v-col cols="12" md="2">
                     <v-select
-                      v-model="lesDatas.affaire.uniteOrgConcerne[index].idrole"
+                      v-model="lesDatas.affaire.employeConcerne[index].idrole"
                       :items="rolesdisp"
                       label="rôle"
                       item-title="label"
@@ -79,7 +79,7 @@
                         <input
                           type="date"
                           class="go_inpdate"
-                          v-model="lesDatas.affaire.uniteOrgConcerne[index].datedebutparticipe"
+                          v-model="lesDatas.affaire.employeConcerne[index].datedebutparticipe"
                         ></input>
                       </div>
                   </v-col>
@@ -89,14 +89,14 @@
                         <input
                           type="date"
                           class="go_inpdate"
-                          v-model="lesDatas.affaire.uniteOrgConcerne[index].datefinparticipe"
+                          v-model="lesDatas.affaire.employeConcerne[index].datefinparticipe"
                         ></input>
                       </div>
                   </v-col>
                   <v-col cols="12" md="3">
                     <v-text-field
                       label="commentaire"
-                      v-model="lesDatas.affaire.uniteOrgConcerne[index].commentaire"
+                      v-model="lesDatas.affaire.employeConcerne[index].commentaire"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" md="1">
@@ -135,24 +135,29 @@ const props = defineProps({
     default() {
       return [
         {
-          id: 13,
-          label: 'Concerné',
-          value: '13'
+          id: 1,
+          label: 'Participant-e',
+          value: '1'
         },
         {
           id: 2,
-          label: 'Gestionnaire',
+          label: 'Responsable',
           value: '2'
         },
         {
-          id: 7,
-          label: 'Leader',
-          value: '7'
+          id: 5,
+          label: 'Gestionnaire',
+          value: '5'
         },
         {
-          id: 1,
-          label: 'Participe',
-          value: '1'
+          id: 6,
+          label: 'Suppléant-e',
+          value: '6'
+        },
+        {
+          id: 12,
+          label: 'Concerné-e',
+          value: '12'
         },
       ]
     }
@@ -188,55 +193,51 @@ const quitteChoixEmployeConcerne = () => {
 }
 
 const receptionEmploye = (idemploye, jsonData) => {
-  console.log(`Réception employé \njson: ${jsonData}`)
-  /*
-  afficheChoixUniteOrg.value = false
-  panelUniteOrgConcerne.value = [0]
+  afficheChoixEmploye.value = false
+  panelEmployeConcerne.value = [0]
 
-  const oUniteOrgRecu = JSON.parse(jsonData)
-  let aoUniteOrgRecu = []
+  const oEmployeRecu = JSON.parse(jsonData)
+  let aoEmployeRecu = []
   let bactif = true
-  if (oUniteOrgRecu.bactif == 0) {
+  if (oEmployeRecu.bactif == 0) {
     bactif = false  
   }
-  if (!Array.isArray(oUniteOrgRecu)) {
-    aoUniteOrgRecu.push(oUniteOrgRecu)    
+  if (!Array.isArray(oEmployeRecu)) {
+    aoEmployeRecu.push(oEmployeRecu)    
   } else {
-    aoUniteOrgRecu = oUniteOrgRecu   
+    aoEmployeRecu = oEmployeRecu   
   }
-  //console.log(aoUniteOrgRecu)
-  for (let i=0; i<aoUniteOrgRecu.length; i++) {
-    //On regarde si cette unité est déjà dans les unités organisationnelle concernées
-    const idUniteOrgRecu = aoUniteOrgRecu[i].id
+  //console.log(aoEmployeRecu)
+  for (let i=0; i<aoEmployeRecu.length; i++) {
+    //On regarde si cet employé est déjà dans les employés concernés
+    const idEmployeRecu = aoEmployeRecu[i].idemploye
     let btrouve = false
-    for (let j=0; j<lesDatas.affaire.uniteOrgConcerne.length; j++) {
-      if (lesDatas.affaire.uniteOrgConcerne[j].iduniteorg == idUniteOrgRecu) {
+    for (let j=0; j<lesDatas.affaire.employeConcerne.length; j++) {
+      if (lesDatas.affaire.employeConcerne[j].idemploye == idEmployeRecu) {
         btrouve = true
       }
     }
 
     if (!btrouve) {
-      const oUniteOrgConcernePlus = {
-        "iduniteorg": idUniteOrgRecu,
+      const oEmployeConcernePlus = {
+        "idemploye": idEmployeRecu,
         "bactif": bactif,
-        "nomuo": aoUniteOrgRecu[i].description,
-        "desctreeuo": '',
+        "nom": `${aoEmployeRecu[i].nom} ${aoEmployeRecu[i].prenom}`,
+        "uniteorg": aoEmployeRecu[i].unite,
         "idrole": roledefaut.value.toString(),
         "datedebutparticipe": '',
         "datefinparticipe": '',
         "commentaire": '',
       }
-      lesDatas.affaire.uniteOrgConcerne.push(oUniteOrgConcernePlus)
+      lesDatas.affaire.employeConcerne.push(oEmployeConcernePlus)
     } else {
-      lesDatas.messagesErreur.messageSnackbar = `Cette unité organisationnelle "${aoUniteOrgRecu[i].description}" fait déjà partie des unités organisationnelle concernées`
+      lesDatas.messagesErreur.messageSnackbar = `Cet employe "${aoEmployeRecu[i].nom} ${aoEmployeRecu[i].prenom}" fait déjà partie des employés concernés`
       lesDatas.messagesErreur.bSnackbar = true
     }
   }
-  */
 }
 
 const supprimeLienEmploye = (index) => {
   lesDatas.affaire.employeConcerne.splice(index, 1)
 }
-
 </script>

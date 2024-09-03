@@ -30,7 +30,17 @@ export const data = defineStore({
           bTermine: ref(false)
         },
         employeConcerne: [],
-
+        /*
+          idemploye: ref(0),
+          bactif: ref(true),
+          nom: ref(''),
+          uniteorg: ref(''),
+          idrole: ref(0),
+          role: ref(''),
+          datedebutparticipe: ref(''),
+          datefinparticipe: ref(''),
+          commentaire: ref(''),
+        */
         uniteOrgConcerne: [],
         /*
           iduniteorg: ref(0),
@@ -60,6 +70,8 @@ export const data = defineStore({
       bdataGenNomOK: ref(true),
       bdataGenDateDebutOK: ref(true),
       bdataGenDateFinOK: ref(true),
+      dataEmployeConcChange: ref(false),
+      bdataEmployeConcOK: ref(true),
       dataUniteOrgConcChange: ref(false),
       bdataUniteOrgConcOK: ref(true),
       dataActeurConcChange: ref(false),
