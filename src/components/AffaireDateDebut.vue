@@ -13,8 +13,10 @@
             <div class="go_divdate">
                 <input
                     type="date"
+                    id="inpDateDebut"
                     class="go_input"
                     v-model="lesDatas.affaire.gen.dateDebut"
+                    @keyup="inpDateDebutkeyup"
                 ></input>
                 <span class="go-erreur">&nbsp;&nbsp;&nbsp;&nbsp;{{ lesDatas.messagesErreur.dateDebut }}</span>
             </div>
@@ -32,6 +34,23 @@ const props = defineProps({
         default: "Commencement de l'affaire"
     }
 })
+
+const inpDateDebutkeyup = () => {
+    //Avec les input de type date standard du html, 
+    //On peut saisir au clavier des dates invalides (31 février par exemple).
+    //Mais alors la value du input est vide donc la variable v-model aussi 
+    //Du coup, il faut vérifier le validity.badInput le l'objet input de type date si on veut indiquer date invalide
+    //qui de toute façon ve na pas être passée plus loin mais dans ce cas, la vue à l'écran ne correspond pas à la valeur 
+    //effective de la date qui est vide.
+    const inpDate = document.getElementById('inpDateDebut')
+    if (inpDate.validity.badInput) {
+        lesDatas.controle.bdataGenDateDebutOK = false
+        lesDatas.messagesErreur.dateDebut = 'la date de date de fin est invalide'
+    } else if (!lesDatas.controle.bdataGenDateFinOK) {
+        lesDatas.controle.bdataGenDateDebutOK = true
+        lesDatas.messagesErreur.dateDebut = ''
+    }
+}
 
 watch(() => lesDatas.affaire.gen.dateDebut, () => {
     //Comme on utilise pas un composant vuetify
