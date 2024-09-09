@@ -45,7 +45,7 @@ const inpDateDebutkeyup = () => {
     const inpDate = document.getElementById('inpDateDebut')
     if (inpDate.validity.badInput) {
         lesDatas.controle.bdataGenDateDebutOK = false
-        lesDatas.messagesErreur.dateDebut = 'la date de date de fin est invalide'
+        lesDatas.messagesErreur.dateDebut = 'la date début est invalide'
     } else if (!lesDatas.controle.bdataGenDateFinOK) {
         lesDatas.controle.bdataGenDateDebutOK = true
         lesDatas.messagesErreur.dateDebut = ''
