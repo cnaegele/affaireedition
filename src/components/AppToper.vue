@@ -52,6 +52,8 @@
 import { ref } from 'vue'
 import { demandeSauveData } from '@/sauve.js'
 import { data } from '@/stores/data.js'
+import UserInformation from '@/components/UserInformation.vue'
+
 const lesDatas = data()
 const navdrawer = ref(false)
 const menuElements = ref([

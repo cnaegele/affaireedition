@@ -15,15 +15,9 @@
         ></v-btn>
       </template>
     </v-snackbar>
-    <AppToper />
 
     <v-main>
-      <div v-if="lesDatas.user.bInGroupe == 0">
-        Utilisation autoris&eacute;e uniquement aux membres du groupe {{ lesDatas.user.groupeSecurite }}
-      </div>
-      <div v-if="lesDatas.user.bInGroupe == 1">
-         <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
-      </div>
+      <Suspense><AffaireEdition :affaireId="prmIdAffaire" /></Suspense>
       <!--<div>{{ JSON.stringify(lesDatas) }}</div>-->
     </v-main>
 

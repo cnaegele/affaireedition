@@ -1,22 +1,28 @@
 <template>
-  <v-container v-if="droitUtilisateur == 'CONTROLETOTAL' || droitUtilisateur == 'EDITION'">
-    <AffaireIdType />
-    <AffaireNom />
-    <AffaireDescription />
-    <AffaireCommentaire />
-    <AffaireEtat />
-    <AffaireDateDebut />
-    <AffaireDateFin />
-    <AffaireEmployesConcernes />  
-    <AffaireUnitesOrgConcernes />  
-    <AffaireActeursConcernes 
-      @infoActeur="infoActeur"
-      :rolesdisp="[
-        { id: 9, label: 'Concerné.e', value: '9'},
-        { id: 10, label: 'Client.e', value: '10'},
-      ]"
-    />
-  </v-container>
+  <AppToper />
+  <div v-if="lesDatas.user.bInGroupe == 0">
+        Utilisation autoris&eacute;e uniquement aux membres du groupe {{ lesDatas.user.groupeSecurite }}
+  </div>
+  <div v-if="lesDatas.user.bInGroupe == 1">
+    <v-container v-if="droitUtilisateur == 'CONTROLETOTAL' || droitUtilisateur == 'EDITION'">
+      <AffaireIdType />
+      <AffaireNom />
+      <AffaireDescription />
+      <AffaireCommentaire />
+      <AffaireEtat />
+      <AffaireDateDebut />
+      <AffaireDateFin />
+      <AffaireEmployesConcernes />  
+      <AffaireUnitesOrgConcernes />  
+      <AffaireActeursConcernes 
+        @infoActeur="infoActeur"
+        :rolesdisp="[
+          { id: 9, label: 'Concerné.e', value: '9'},
+          { id: 10, label: 'Client.e', value: '10'},
+        ]"
+      />
+    </v-container>
+  </div>
   <div class="messageErreur" v-else>
     <v-container>Vous n'avez pas le droit d'éditer cette affaire (id: {{ affaireId }})</v-container>
   </div>
@@ -55,6 +61,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import AppToper from '@/components/AppToper.vue'
 import AffaireIdType from '@/components/AffaireIdType.vue'
 import AffaireNom from '@/components/AffaireNom.vue'
 import AffaireDescription from '@/components/AffaireDescription.vue'
